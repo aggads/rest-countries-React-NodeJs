@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Button } from 'react-bootstrap';
+import { Button, Card, Alert } from 'react-bootstrap';
+import './Slot.css'
 
 export default class Slot extends Component {
   constructor(props) {
@@ -8,13 +9,32 @@ export default class Slot extends Component {
       reel1: ['cherry', 'lemon', 'apple', 'lemon', 'banana', 'banana', 'lemon', 'lemon'],
       reel2: ['lemon', 'apple', 'lemon', 'lemon', 'cherry', 'apple', 'banana', 'lemon'],
       reel3: ['lemon', 'apple', 'lemon', 'apple', 'cherry', 'lemon', 'banana', 'lemon'],
+      results: [],
+      message: '',
+      showSuccess: false,
+      showFailed: false,
       coins: 20
 
     };
   }
 
+  findDuplicates = (arr) => {
+    let sorted_arr = arr.slice().sort();
+    let results = [];
+    for (let i = 0; i < sorted_arr.length - 1; i++) {
+      if (sorted_arr[i + 1] === sorted_arr[i]) {
+        results.push(sorted_arr[i]);
+      }
+    }
+    return results;
+  }
+  
+
   shuffle = () =>{
-    // if(this.state.coins > 0){
+    if(this.state.coins > 0){
+
+      this.setState({showSuccess: false, showFailed: false, results: [], message: ''});
+      
       var value1 = this.state.reel1.sort(() => Math.random() - Math.random()).find(() => true);
       var value2 = this.state.reel2.sort(() => Math.random() - Math.random()).find(() => true);
       var value3 = this.state.reel3.sort(() => Math.random() - Math.random()).find(() => true);
@@ -25,49 +45,97 @@ export default class Slot extends Component {
       console.log('------ reel 2 = ' + value2 + '------');
       console.log('------ reel 3 = ' + value3 + '------');
       console.log('------------');
-  
-      var result = [];
-  
-      result.push(value1, value2, value3)
-  
-      this.setState({coins: this.state.coins -1})
-  
-      const equallLemon = arr => arr.every( v => v === 'lemon' )
-      equallLemon( result )
 
-      const equallCherries = arr => arr.every( v => v === 'cherry' )
-      equallCherries( result )
+      this.state.results.push(value1, value2, value3);
   
-      if( equallLemon( result )){
-        this.setState({coins: this.state.coins + 3})
-        console.log('YOU WON, + 3 coins');
-      }else if(equallCherries( result )){
-        this.setState({coins: this.state.coins + 50})
-        alert('YOU WON, + 50 coins');
+      this.setState({coins: this.state.coins -30});
+
+      if(value1 === value2 && value1 === value3){
+        console.log('3 pairs');
+        this.setState({showSuccess: true});
+        switch (value1) {
+          case 'cherry':
+            this.setState({coins: this.state.coins +50});
+            this.setState({message : '+50 coins'});
+            break;
+          case 'apple':
+            this.setState({coins: this.state.coins +20});
+            this.setState({message : '+20 coins'});
+            break;
+          case 'banana':
+            this.setState({coins: this.state.coins +15});
+            this.setState({message :'+15 coins'});
+            break;
+          case 'lemon':
+            this.setState({coins: this.state.coins +3});
+            this.setState({message : '+3 coins'});
+            break;
+          default:
+            break;
+        }
+      }else if(value1 === value2 || value1 === value3 || value2 === value3){
+
+        console.log('2 pairs', this.findDuplicates(this.state.results));
+        var twoPairs = this.findDuplicates(this.state.results);
+        var result = twoPairs[0];
+
+        if(result !== 'lemon'){
+          this.setState({showSuccess: true});
+          switch (result) {
+            case 'cherry':
+              this.setState({coins: this.state.coins +40});
+              this.setState({message : '+40 coins'});
+              break;
+            case 'apple':
+              this.setState({coins: this.state.coins +10});
+              this.setState({message : '+10 coins'});
+              break;
+            case 'banana':
+              this.setState({coins: this.state.coins +5});
+              this.setState({message :'+5 coins'});
+              break;
+            default:
+              break;
+          }
+        }else{
+          this.setState({showFailed: true});
+          this.setState({message: 'You lose, try again !'});
+        }
+      }else{
+        console.log('you lose');
+        this.setState({showFailed: true});
+        this.setState({message: 'You lose, try again !'});
       }
-  
-      // switch (key) {
-      //   case equallLemon( result ):
-      //     if( allEqual( result )){
-      //       console.log('YOU WON');
-      //     }
-      //     break;
+      console.log('result', this.state.results, this.state.coins);
       
-      //   default:
-      //     break;
-      // }
-      
-      console.log('result', result, this.state.coins);
-      
-    // }else{
-    //   alert('No coins, please reload')
-    // }
+    }else{
+      this.setState({showFailed: true});
+      this.setState({message: 'No more coins, please, reload'})
+    }
   }
+  
   render() {
+    const reels = this.state.results.map((item, index) => <span key={index} className="reels">{item}</span>)
     return (
-      <div className='slot'>
-          <span>Slot work</span>
-          <Button onClick={this.shuffle}></Button>
+      <div className="slot">
+        <Card className="text-center">
+          <Card.Header></Card.Header>
+          <span className="coins">Coins {this.state.coins < 0 ? 0 : this.state.coins}</span>
+          <Card.Body>
+            <Card.Title><h1>Slot</h1></Card.Title>
+            <Card.Text>
+            {reels}
+            </Card.Text>
+            <Button  variant="dark" size="lg" onClick={this.shuffle}>Spin</Button>
+          </Card.Body>
+          <Card.Footer className="text-muted"></Card.Footer>
+        </Card>
+        <Alert variant="success" show={this.state.showSuccess}>
+            <Alert.Heading>{this.state.message}</Alert.Heading>
+        </Alert>
+        <Alert variant="danger" show={this.state.showFailed}>
+            <Alert.Heading>{this.state.message}</Alert.Heading>
+        </Alert>
       </div>
     )
   }
