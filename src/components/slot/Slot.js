@@ -32,7 +32,7 @@ export default class Slot extends Component {
 
   shuffle = () =>{
     if(this.state.coins > 0){
-
+      var dummyArray = [];
       this.setState({showSuccess: false, showFailed: false, results: [], message: ''});
       
       var value1 = this.state.reel1.sort(() => Math.random() - Math.random()).find(() => true);
@@ -46,9 +46,9 @@ export default class Slot extends Component {
       console.log('------ reel 3 = ' + value3 + '------');
       console.log('------------');
 
-      this.state.results.push(value1, value2, value3);
+      dummyArray.push(value1, value2, value3);
   
-      this.setState({coins: this.state.coins -30});
+      this.setState({coins: this.state.coins -1});
 
       if(value1 === value2 && value1 === value3){
         console.log('3 pairs');
@@ -75,8 +75,8 @@ export default class Slot extends Component {
         }
       }else if(value1 === value2 || value1 === value3 || value2 === value3){
 
-        console.log('2 pairs', this.findDuplicates(this.state.results));
-        var twoPairs = this.findDuplicates(this.state.results);
+        console.log('2 pairs', this.findDuplicates(dummyArray));
+        var twoPairs = this.findDuplicates(dummyArray);
         var result = twoPairs[0];
 
         if(result !== 'lemon'){
@@ -106,12 +106,13 @@ export default class Slot extends Component {
         this.setState({showFailed: true});
         this.setState({message: 'You lose, try again !'});
       }
-      console.log('result', this.state.results, this.state.coins);
-      
+      console.log('result', dummyArray, this.state.coins);
     }else{
       this.setState({showFailed: true});
       this.setState({message: 'No more coins, please, reload'})
     }
+    this.setState({results: dummyArray});
+    dummyArray = [];
   }
   
   render() {
