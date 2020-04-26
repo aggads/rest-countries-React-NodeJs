@@ -1,8 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { Button, Card, Alert } from 'react-bootstrap';
-import './Slot.css'
+import './Slot.css';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { increment } from '../../actions';
 
-export default class Slot extends Component {
+class Slot extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -49,6 +52,8 @@ export default class Slot extends Component {
       dummyArray.push(value1, value2, value3);
   
       this.setState({coins: this.state.coins -1});
+
+      this.props.dispatch(increment())
 
       if(value1 === value2 && value1 === value3){
         console.log('3 pairs');
@@ -141,3 +146,8 @@ export default class Slot extends Component {
     )
   }
 }
+
+function mapDispatchToProps(dispatch) {
+  return { actions: bindActionCreators(increment, dispatch) }
+}
+export default connect(mapDispatchToProps)(Slot);

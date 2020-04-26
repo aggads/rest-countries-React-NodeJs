@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import Table from 'react-bootstrap/Table';
 import axios from 'axios';
 import { Form, FormControl } from 'react-bootstrap';
-import './CountriesList.css'
+import './CountriesList.css';
+import apiUrl from './../../constants/constants';
 
 export default class CountriesList extends Component {
   constructor(props) {
@@ -12,6 +13,7 @@ export default class CountriesList extends Component {
       countries : [],
       filterName: ''
     };
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange = (e) => {
@@ -19,7 +21,7 @@ export default class CountriesList extends Component {
       filterName: e.target.value
     })
     if(e.target.value !== ''){
-      axios.get(`https://restcountries.eu/rest/v2/name/${e.target.value}`)
+      axios.get(`${apiUrl.API_URL}/name/${e.target.value}`)
       .then(res => {
         const countries = res.data;
         this.setState({ countries });
@@ -29,11 +31,10 @@ export default class CountriesList extends Component {
         alert(error.response.data.message)
       })
     }
-    // this.props.onChange(e.target.value)
   }
 
   componentDidMount() {
-    axios.get(`https://restcountries.eu/rest/v2/all`)
+    axios.get(`${apiUrl.API_URL}/all`)
       .then(res => {
         const countries = res.data;
         this.setState({ countries });
