@@ -1,0 +1,9 @@
+.listing{
+    text-align: center;
+}
+
+.form-inline {
+    display: block !important;
+    flex-flow: row wrap;
+    align-items: center;
+}
