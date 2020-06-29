@@ -4,10 +4,12 @@ import { Route, BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
 import NaviBar from './components/navbar/NaviBar';
 import CountriesList from './components/countriesList/CountriesList';
+import User from './components/User/User';
 import Slot from './components/slot/Slot';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './reducers';
+import CountryName from './components/countryName/countryName';
 
 const store = createStore(reducer)
 
@@ -19,8 +21,10 @@ export const makeRouting = () => {
       <NaviBar />
         <div>
           <Route path="/" component={App} exact/>
+          <Route path="/byName" component={CountryName} />
           <Route path="/listing" component={CountriesList} />
           <Route path="/slot" component={Slot} />
+          <Route path="/user" component={User} />
         </div>
       </Router>
      </Provider>

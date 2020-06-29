@@ -1,6 +1,7 @@
 import React, { Component } from 'react'; 
 import { Nav, Navbar } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
+
 
 class NaviBar extends Component {
   render() {
@@ -18,8 +19,10 @@ class NaviBar extends Component {
     </Navbar.Brand>
       <Nav className="mr-auto">
         <Nav.Link as={NavLink} to="/"> Home</Nav.Link>
+        <Nav.Link as={NavLink} to="/byName">By Name</Nav.Link>
         <Nav.Link as={NavLink} to="/listing">Listing</Nav.Link>
         <Nav.Link as={NavLink} to="/slot">Slot</Nav.Link>
+        <Nav.Link as={NavLink} to="/user">User</Nav.Link>
       </Nav>
     </Navbar>
     )
