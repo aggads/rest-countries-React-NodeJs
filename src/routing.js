@@ -8,7 +8,7 @@ import Slot from './components/slot/Slot';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './reducers';
-import CountryName from './components/countryName/countryName';
+import CountryName from './components/countryName/CountryName';
 
 const store = createStore(reducer)
 

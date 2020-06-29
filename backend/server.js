@@ -7,9 +7,11 @@ const app = express();
 var cors = require('cors');
 app.use(cors());
 
+app.use('/', require('./routes/countries'));
+
 app.use(favicon(__dirname + '/build/favicon.ico'));
 
-app.use(express.static(__dirname));
+app.use(express.static(__dirname+ '/'));
 app.use(express.static(path.join(__dirname, '../build')));
 
 // app.get('/ping', function (req, res) {
@@ -23,7 +25,6 @@ app.get('*', function (req, res) {
 app.use(bodyParser.urlencoded({extended : false}));
 app.use(bodyParser.json());
 
-app.use('/', require('./routes/countries'));
 
 app.listen(port, () => {
   console.log("Server running on port 4043");

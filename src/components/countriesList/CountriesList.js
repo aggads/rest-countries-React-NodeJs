@@ -44,12 +44,12 @@ export default class CountriesList extends Component {
 
   render() {
 
-    // const items = this.state.countries.map((contry, index) =>
-    //   <tr key={index}>
-    //     <td>{index}</td>
-    //     <td >{contry.name}</td>
-    //   </tr>
-    // );
+    const items = this.state.countries.map((contry, index) =>
+      <tr key={index}>
+        <td>{index}</td>
+        <td >{contry.name}</td>
+      </tr>
+    );
 
     return (
       <div className='listing'> 
@@ -70,7 +70,7 @@ export default class CountriesList extends Component {
           </tr>
         </thead>
         <tbody>
-
+        {items}
         </tbody>
       </Table>
       </div>
