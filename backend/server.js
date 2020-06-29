@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const favicon = require('express-favicon');
+// const favicon = require('express-favicon');
 const path = require('path');
 const port = process.env.PORT || 4043;
 const app = express();
@@ -9,7 +9,7 @@ app.use(cors());
 
 app.use('/', require('./routes/countries'));
 
-app.use(favicon(__dirname + '/build/favicon.ico'));
+// app.use(favicon(__dirname + '/build/favicon.ico'));
 
 app.use(express.static(__dirname+ '/'));
 app.use(express.static(path.join(__dirname, '../build')));

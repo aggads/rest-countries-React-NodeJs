@@ -4,9 +4,9 @@ var request = require('request');
 
 const externalUrl = 'https://restcountries.eu/rest/v2';
 
-router.get('/', (_, res) =>{
-  res.send('app running')
-});
+// router.get('/', (_, res) =>{
+//   res.send('app running')
+// });
 
 router.get('/all', (req, res, next) => {
   request({
