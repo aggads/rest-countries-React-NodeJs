@@ -20,6 +20,7 @@ class NaviBar extends Component {
       <Nav className="mr-auto">
         <Nav.Link as={NavLink} to="/"> Home</Nav.Link>
         <Nav.Link as={NavLink} to="/byName">By Name</Nav.Link>
+        <Nav.Link as={NavLink} to="/filter">Filter</Nav.Link>
         <Nav.Link as={NavLink} to="/listing">Listing</Nav.Link>
         <Nav.Link as={NavLink} to="/slot">Slot</Nav.Link>
       </Nav>

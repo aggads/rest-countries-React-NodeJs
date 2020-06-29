@@ -23,6 +23,5 @@ ECHO Running the server
 ECHO ====================================================================
 CLS
 cd ..
-cd ..
 call node server.js
 PAUSE

@@ -9,6 +9,7 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './reducers';
 import CountryName from './components/countryName/CountryName';
+import CountryFilter from './components/countryFilter/CountryFilter';
 
 const store = createStore(reducer)
 
@@ -21,6 +22,7 @@ export const makeRouting = () => {
         <div>
           <Route path="/" component={App} exact/>
           <Route path="/byName" component={CountryName} />
+          <Route path="/filter" component={CountryFilter} />
           <Route path="/listing" component={CountriesList} />
           <Route path="/slot" component={Slot} />
         </div>

@@ -1,0 +1,17 @@
+.countryName {
+    background-color: #343a40!important;
+}
+
+.title {
+    color: #fff;
+    text-align: center;
+}
+
+.form-inline{
+    padding: 1%;
+    text-align: center;
+}
+
+td, tr{
+    text-align: center;
+}

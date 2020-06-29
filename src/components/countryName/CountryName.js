@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
-// import styles from './countryName.module.css';
+import React, { Component } from 'react';
+import './countryName.css';
 import axios from 'axios';
 import apiUrl from './../../constants/constants';
+import { Form, FormControl, Button, Table } from 'react-bootstrap';
 
 
 export default class CountryName extends Component {
@@ -19,47 +20,42 @@ export default class CountryName extends Component {
     this.setState({inputValue: e.target.value});
   }
 
-  handleSubmit  = () =>{
-    console.log(this.state.inputValue);
-    axios.get(`${apiUrl.API_URL}/name/${this.state.inputValue}?fullText=true`)
+  handleSubmit = () =>{
+    axios.get(`${apiUrl.API_URL}/name/${this.state.inputValue}`)
       .then(res => {
-        // var value = res.data;
-        this.setState({ country : res.data });
-        console.log('data', res.data);
+        var value = res.data;
+        if(!value.includes('<!doctype html>')){
+          value.filter((item) =>{
+            if(item.name.toLocaleLowerCase() === this.state.inputValue.toLocaleLowerCase()){
+              this.setState({ country : item });
+            }
+          })
+        }
       })
   }
 
-
   render() {
 
-    const items = this.state.country.map((country, index) =>
-    <tr key={index}>
-      <td ></td>
-      <td >{country.name}</td>
-      <td >{country.capital}</td>
-      <td >
-        <img className="flag-img" src={country.flag} alt="flag" style={{width: '5rem'}}/>
-      </td>
-    </tr>
-  );
+    const Results = () => (
+      <tr >
+        <td ></td>
+        <td >{this.state.country.name}</td>
+        <td >{this.state.country.capital}</td>
+        <td >
+          <img className="flag-img" src={this.state.country.flag} alt="flag" style={{width: '5rem'}}/>
+        </td>
+      </tr>
+    )
 
     return (
-      <div>
-        <h1> type here</h1>
-      <input
-        onChange={this.handleChange}
-        type="text" 
-        className="form-control mb-2 mr-sm-2" 
-        placeholder="Country Name" />
-
-        <button className="btn btn-dark" type="button"
-          onClick={this.handleSubmit}
-        >Button</button>
-
-        <br />
-
+      <div className='countryName'>
+        <h1 className="title"> Search country by exact name</h1>
+        <Form inline>
+          <FormControl type="text" onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }} onChange={this.handleChange} placeholder="Search" className="mr-sm-2" />
+          <Button variant="outline-primary" onClick={this.handleSubmit} >Search</Button>
+        </Form>
         <div className="table-responsive">
-        <table className="table table-dark">
+        <Table striped bordered hover variant="dark">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -69,9 +65,11 @@ export default class CountryName extends Component {
             </tr>
           </thead>
           <tbody>
-             {items}
+            {
+              this.state.country.name ? <Results /> : null
+            }
           </tbody>
-        </table>
+        </Table>
         </div>
       </div>
     )

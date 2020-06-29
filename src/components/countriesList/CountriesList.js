@@ -25,7 +25,6 @@ export default class CountriesList extends Component {
       .then(res => {
         const countries = res.data;
         this.setState({ countries });
-        console.log('data', res.data);
       })
       .catch (error => {
         alert(error.response.data.message)
@@ -36,9 +35,7 @@ export default class CountriesList extends Component {
   componentDidMount() {
     axios.get(`${apiUrl.API_URL}/all`)
       .then(res => {
-        this.setState({ countries : res.data});
-        console.log('data', res.data);
-        
+        this.setState({ countries : res.data});        
       })
   }
 
