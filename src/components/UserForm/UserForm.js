@@ -66,7 +66,7 @@ export default class UserForm extends Component {
     if (errors.length > 0) {
       return false;
     } else {
-      // alert("everything is good. submiting form!");
+      alert("everything is good. submiting form!");
     }
   }
 
