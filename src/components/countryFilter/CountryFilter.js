@@ -76,7 +76,7 @@ export default class CountryFilter extends Component {
       <h1 className="title"> Filter country by name</h1>
         <div className="searchBar">
           <Form inline>
-            <FormControl type="text" placeholder="Search by name" className="mr-sm-2"  
+            <FormControl type="text" placeholder="Filter by name" className="mr-sm-2"  
             onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}
             value={this.state.filterName} 
             onChange={this.handleChange}/>

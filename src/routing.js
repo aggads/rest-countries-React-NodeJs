@@ -5,13 +5,11 @@ import App from './App';
 import NaviBar from './components/navbar/NaviBar';
 import CountriesList from './components/countriesList/CountriesList';
 import Slot from './components/slot/Slot';
-import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import reducer from './reducers';
 import CountryName from './components/countryName/CountryName';
 import CountryFilter from './components/countryFilter/CountryFilter';
-
-const store = createStore(reducer)
+import UserForm from './components/UserForm/UserForm';
+import store from './reducers/store.js';
 
 export const makeRouting = () => {
 
@@ -25,6 +23,7 @@ export const makeRouting = () => {
           <Route path="/filter" component={CountryFilter} />
           <Route path="/listing" component={CountriesList} />
           <Route path="/slot" component={Slot} />
+          <Route path="/form" component={UserForm} />
         </div>
       </Router>
      </Provider>

@@ -22,7 +22,7 @@ class NaviBar extends Component {
         <Nav.Link as={NavLink} to="/byName">By Name</Nav.Link>
         <Nav.Link as={NavLink} to="/filter">Filter</Nav.Link>
         <Nav.Link as={NavLink} to="/listing">Listing</Nav.Link>
-        <Nav.Link as={NavLink} to="/slot">Slot</Nav.Link>
+        <Nav.Link as={NavLink} to="/form">Form</Nav.Link>
       </Nav>
     </Navbar>
     )
