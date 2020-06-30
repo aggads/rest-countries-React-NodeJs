@@ -1,1 +1,6 @@
-.navbar {}
+.btn {
+    /* padding: 20%; */
+    margin: 5px;
+    color: #fff;
+    background-color: #82b1ff !important;
+}

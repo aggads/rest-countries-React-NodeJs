@@ -1,7 +1,7 @@
 import React, { Component } from 'react'; 
-import { Nav, Navbar } from 'react-bootstrap';
+import { Nav, Navbar, Form, Button } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
-
+import './NaviBar.css'
 
 class NaviBar extends Component {
   render() {
@@ -24,6 +24,11 @@ class NaviBar extends Component {
         <Nav.Link as={NavLink} to="/listing">Listing</Nav.Link>
         <Nav.Link as={NavLink} to="/form">Form</Nav.Link>
       </Nav>
+      <Form inline>
+        <Button type="button" className="btn btn-primary">
+          Login
+        </Button>
+    </Form>
     </Navbar>
     )
   }
