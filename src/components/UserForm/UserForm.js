@@ -66,7 +66,8 @@ export default class UserForm extends Component {
     if (errors.length > 0) {
       return false;
     } else {
-      alert("everything is good. submiting form!");
+      localStorage.setItem("user", JSON.stringify(user));
+      alert("everything is good. User saved in localStorage!");
     }
   }
 
@@ -95,7 +96,7 @@ export default class UserForm extends Component {
         <h1 className="formSection">Form Section</h1>
         <span className="limit"></span>
         <Form>
-        <Form.Group controlId="formBasicEmail">
+        <Form.Group controlId="formBasicName">
             <Form.Label>Name</Form.Label>
             <Form.Control 
               className={
