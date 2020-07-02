@@ -4,6 +4,12 @@ import './Slot.css';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { increment } from '../../actions';
+import lemon from '../../assets/images/lemon.svg'
+import cherry from '../../assets/images/cherry.svg'
+import apple from '../../assets/images/apple.svg'
+import banana from '../../assets/images/banana.svg'
+import Icon from './../icon/icon';
+
 
 class Slot extends Component {
   constructor(props) {
@@ -16,8 +22,13 @@ class Slot extends Component {
       message: '',
       showSuccess: false,
       showFailed: false,
-      coins: 20
-
+      coins: 20,
+      Icons: [
+        {lemon: lemon}, 
+        {cherry:cherry}, 
+        {apple:apple}, 
+        {banana:banana}
+      ]
     };
   }
 
@@ -116,12 +127,32 @@ class Slot extends Component {
       this.setState({showFailed: true});
       this.setState({message: 'No more coins, please, reload'})
     }
+    // Icon implementation WIP
+    // dummyArray.forEach(element => {
+
+    //     for (const icon in this.state.Icons) {
+    //         const item = this.state.Icons[icon];
+                        
+    //         if(element === Object.keys(element)){
+    //           Object.assign(element,  {icon : Object.values(element)});
+    //         }
+    //       this.setState({results: dummyArray});
+    //       }
+    // });
+    // console.log('dummy array', this.state.results);
+    
     this.setState({results: dummyArray});
     dummyArray = [];
   }
   
   render() {
-    const reels = this.state.results.map((item, index) => <span key={index} className="reels">{item}</span>)
+
+    const reels = this.state.results.map(
+      (item, index) => 
+        <span key={index} className="reels">
+        {item}
+        </span>
+      );
     return (
       <div className="slot">
         <Card className="text-center">

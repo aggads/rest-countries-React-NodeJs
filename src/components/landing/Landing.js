@@ -11,7 +11,7 @@ export default class Landing extends Component {
         <br />
         <ul className="questionList">
           <li className="listItem">
-            Question 1 ={">"} Section : By Name
+            Question 1 ={">"} Section : By Name (WIP)
           </li>
           <li className="listItem">
             Question 2 ={">"} Section : Listing
@@ -24,6 +24,9 @@ export default class Landing extends Component {
           </li>
           <li className="listItem">
             Question 5 ={">"} Section : Form
+          </li>
+          <li className="listItem">
+            Question 6 ={">"} Login button (WIP)
           </li>
         </ul>
       </div>

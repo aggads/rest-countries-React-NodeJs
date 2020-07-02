@@ -3,6 +3,9 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { makeRouting } from './routing';
+// setup fake backend
+import { configureFakeBackend } from './helpers/fake-backend';
+configureFakeBackend();
 
 const routes = makeRouting();
 

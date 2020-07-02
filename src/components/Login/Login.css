@@ -1,0 +1,16 @@
+.Login {}
+
+.modal-content{
+    color: #fff;
+    background-color: #343a40!important;
+}
+
+.logginBtn {
+    color: #fff;
+    background-color: #82b1ff !important;
+    width: 20%;
+}
+
+.title{
+    margin-left: 26%;
+}
