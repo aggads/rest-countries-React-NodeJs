@@ -26,7 +26,7 @@ export default class Landing extends Component {
             Question 5 ={">"} Section : Form
           </li>
           <li className="listItem">
-            Question 6 ={">"} Login button (WIP)
+            Question 6 ={">"} Login button
           </li>
         </ul>
       </div>
