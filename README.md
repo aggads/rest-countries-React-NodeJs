@@ -1,16 +1,10 @@
 # Test 
 
-Run *npm install* then *npm start*
+If windows user as administrator run : "script-windows.bat"
 
-It will start a server on the port *8080*
+Else on your command line in this repertory run : "bash script-linux.sh" and follow the step
 
-On your browser put : *localhost:8080* to see the project
-
-The listing of the countries with the filter is on the listing in the navbar
-
-The slot section is on the slot in the navbar
-
-The schema of the database is inside the backend folder and can be open with any text editor you want
+<!-- The schema of the database is inside the backend folder and can be open with any text editor you want -->
 
 The app is deployed on Heroku
 

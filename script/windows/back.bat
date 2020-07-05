@@ -1,4 +1,4 @@
-:: This batch file install the different package and run the back
+:: This batch file install the different package and run the back-end server
 ECHO OFF
 :: Installation of the package for the back (server node)
 ::----------------------------------------------------------------------

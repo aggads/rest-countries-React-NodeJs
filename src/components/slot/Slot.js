@@ -4,16 +4,17 @@ import './Slot.css';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { increment } from '../../actions';
-import lemon from '../../assets/images/lemon.svg'
-import cherry from '../../assets/images/cherry.svg'
-import apple from '../../assets/images/apple.svg'
-import banana from '../../assets/images/banana.svg'
-import Icon from './../icon/icon';
+import Lemon from '../../assets/images/lemon.svg'
+import Cherry from '../../assets/images/cherry.svg'
+import Apple from '../../assets/images/apple.svg'
+import Banana from '../../assets/images/banana.svg'
+// import Icon from './../icon/icon';
 
 
 class Slot extends Component {
   constructor(props) {
     super(props);
+    this.titleCase = this.titleCase.bind(this);
     this.state = {
       reel1: ['cherry', 'lemon', 'apple', 'lemon', 'banana', 'banana', 'lemon', 'lemon'],
       reel2: ['lemon', 'apple', 'lemon', 'lemon', 'cherry', 'apple', 'banana', 'lemon'],
@@ -23,11 +24,23 @@ class Slot extends Component {
       showSuccess: false,
       showFailed: false,
       coins: 20,
-      Icons: [
-        {lemon: lemon}, 
-        {cherry:cherry}, 
-        {apple:apple}, 
-        {banana:banana}
+      icons: [
+        {
+          name: 'lemon',
+          value: Lemon
+        }, 
+        {
+          name: 'cherry',
+          value:Cherry
+        }, 
+        {
+          name: 'apple',
+          value:Apple
+        }, 
+        {
+          name: 'banana',
+          value:Banana
+        }
       ]
     };
   }
@@ -127,32 +140,35 @@ class Slot extends Component {
       this.setState({showFailed: true});
       this.setState({message: 'No more coins, please, reload'})
     }
-    // Icon implementation WIP
-    // dummyArray.forEach(element => {
-
-    //     for (const icon in this.state.Icons) {
-    //         const item = this.state.Icons[icon];
-                        
-    //         if(element === Object.keys(element)){
-    //           Object.assign(element,  {icon : Object.values(element)});
-    //         }
-    //       this.setState({results: dummyArray});
-    //       }
-    // });
-    // console.log('dummy array', this.state.results);
     
     this.setState({results: dummyArray});
     dummyArray = [];
   }
   
+  titleCase = (str) => {
+    str = str.toLowerCase().split(' ');
+    for (var i = 0; i < str.length; i++) {
+      str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1); 
+    }
+    return str.join(' ');
+  }
+
   render() {
 
     const reels = this.state.results.map(
-      (item, index) => 
-        <span key={index} className="reels">
-        {item}
-        </span>
-      );
+      (item, i) =>
+      {
+        for (let index = 0; index < this.state.icons.length; index++) {
+          const icon = this.state.icons[index];
+          if(item === icon.name){              
+            return(
+              <span key={i} className="reels">
+              <img src={icon.value} alt={this.titleCase(item)} width="50" height="50"/>
+              </span>
+            )
+          }
+        }
+      });
     return (
       <div className="slot">
         <Card className="text-center">
@@ -160,12 +176,36 @@ class Slot extends Component {
           <span className="coins">Coins {this.state.coins < 0 ? 0 : this.state.coins}</span>
           <Card.Body>
             <Card.Title><h1>Slot</h1></Card.Title>
+            <br/>
             <Card.Text>
             {reels}
             </Card.Text>
+            <br/>
             <Button  variant="dark" size="lg" onClick={this.shuffle}>Spin</Button>
           </Card.Body>
-          <Card.Footer className="text-muted"></Card.Footer>
+          <Card.Footer className="text-muted">
+            <h5>Rules</h5>
+              <ul>
+                <li>
+                  3 cherries in a row: won 50 coins
+                </li>
+                <li>
+                  2 cherries in a row: won 40 coins
+                </li>
+                <li>
+                  2 Apples in a row: won 10 coins
+                </li>
+                <li>
+                  3 Bananas in a row: won 15 coins
+                </li>
+                <li>
+                  2 Bananas in a row: won 5 coins
+                </li>
+                <li>
+                  3 lemons in a row: won 3 coins
+                </li>
+              </ul>
+          </Card.Footer>
         </Card>
         <Alert variant="success" show={this.state.showSuccess}>
             <Alert.Heading>{this.state.message}</Alert.Heading>
